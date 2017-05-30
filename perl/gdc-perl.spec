@@ -25,6 +25,8 @@ BuildRequires:	bash
 
 make %{?_smp_mflags}
 
+%check
+make test
 
 %install
 make install DESTDIR=%{buildroot}
