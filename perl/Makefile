@@ -18,10 +18,10 @@ srpm    := $(srcrpmdir)/gdc-perl-$(version)-$(release).src.rpm
 rpm     := $(rpmdir)/$(arch)/gdc-perl-$(version)-$(release).$(arch).rpm
 
 vars:
-	@echo version=$(version)
-	@echo release=$(release)
-	@echo    srpm=$(srpm)
-	@echo     rpm=$(rpm)
+	@echo "version=$(version)"
+	@echo "release=$(release)"
+	@echo "   srpm=$(srpm)"
+	@echo "    rpm=$(rpm)"
 
 $(builddir) $(buildrootdir) $(rpmdir) $(sourcedir) $(specdir) $(srcrpmdir):
 	mkdir -v -p $(builddir) $(buildrootdir) $(rpmdir) $(sourcedir) $(specdir) $(srcrpmdir)
@@ -29,7 +29,7 @@ $(builddir) $(buildrootdir) $(rpmdir) $(sourcedir) $(specdir) $(srcrpmdir):
 $(sourcedir)/$(tarball): $(sourcedir)
 	spectool -C $(sourcedir) -g gdc-perl.spec
 
-$(srpm): $(sourcedir)/$(tarball) $(srcrpmdir)
+$(srpm): $(sourcedir)/$(tarball) $(srcrpmdir) $(spec)
 	rpmbuild \
 		--define "_topdir $(topdir)" \
 		-bs gdc-perl.spec
@@ -37,9 +37,16 @@ $(srpm): $(sourcedir)/$(tarball) $(srcrpmdir)
 srpm: $(srpm)
 
 $(rpm): $(srpm) $(builddir) $(buildrootdir) $(rpmdir)
+	sudo mock  \
+		--init
 	sudo mock \
-		--copyin perl.req perl.prov /usr/lib/rpm/
+		--no-clean \
+		--copyin rpmdepgen/gdc-perl.req rpmdepgen/gdc-perl.prov /usr/lib/rpm/
 	sudo mock \
+		--no-clean \
+		--copyin rpmdepgen/gdcperl.attr rpmdepgen/gdcperllib.attr /usr/lib/rpm/fileattrs
+	sudo mock \
+		--no-clean \
 		--resultdir . \
 		--rebuild \
 		$(srpm)
