@@ -281,14 +281,7 @@ sub process_file {
       # to mean that a particular version of perl is specified
 
       my $ver = $1;
-      if ($ver =~ /5.00/) {
-        $perlreq{"0:$ver"} = 1;
-        next;
-      }
-      else {
-        $perlreq{"1:$ver"} = 1;
-        next;
-      }
+      $perlreq{"0:$ver"} = 1;
 
       };
 
