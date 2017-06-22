@@ -1,5 +1,5 @@
 %__gdcperllib_provides	%{_rpmconfigdir}/gdc-perl.prov
 %__gdcperllib_requires	%{_rpmconfigdir}/gdc-perl.req
-%__gdcperllib_magic	^Perl[[:digit:]] module source.*
-%__gdcperllib_path	^/opt/gdc/perl/.*\\.pm$
+%__gdcperllib_magic	^Perl5 module source.*
+%__gdcperllib_path	/opt/gdc/perl/.*\\.pm$
 %__gdcperllib_flags	magic_and_path

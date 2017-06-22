@@ -1,3 +1,4 @@
 %__gdcperl_requires	%{_rpmconfigdir}/gdc-perl.req
-%__gdcperl_magic	^/opt/gdc/perl/.*[Pp]erl .*$
+%__gdcperl_magic	^.*[Pp]erl .*$
+%__gdcperl_path		/opt/gdc/perl/
 %__gdcperl_flags	exeonly
