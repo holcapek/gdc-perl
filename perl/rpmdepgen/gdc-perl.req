@@ -281,7 +281,8 @@ sub process_file {
       # to mean that a particular version of perl is specified
 
       my $ver = $1;
-      $perlreq{"0:$ver"} = 1;
+      $perlreq{"$ver"} = 1;
+      next;
 
       };
 
